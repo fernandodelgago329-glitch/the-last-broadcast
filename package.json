@@ -1,0 +1,12 @@
+{
+  "name": "the-last-broadcast",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Real-time social deduction party game",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
