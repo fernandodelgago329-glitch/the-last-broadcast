@@ -26,7 +26,7 @@ function roomFor(req, data) {
 }
 function publicState(room, viewer) {
   const now = Date.now();
-  if (room.phase === 'meeting' && now - room.meeting.startedAt > 30000) resolveMeeting(room);
+  if (room.phase === 'meeting' && now - room.meeting.startedAt >= 30000) resolveMeeting(room);
   const current = room.players.find(p => p.id === viewer.id);
   const role = current && current.role === 'saboteur' ? 'saboteur' : 'operator';
   return {
@@ -58,6 +58,7 @@ function resolveMeeting(room) {
     if (out) { out.alive = false; event(room, `${out.name} was voted out.`); }
   } else event(room, 'The vote was tied. Nobody was removed.');
   room.meeting = null;
+  room.phase = 'playing';
   checkWin(room);
 }
 function checkWin(room) {
